@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mobileapplication11.R
+import com.example.mobileapplication11.home.homePosts.HomePostsFragment
 
 class HomeFragment : Fragment() {
 
@@ -15,6 +16,13 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        parentFragmentManager.beginTransaction()
+//            .replace(R.id.homePlaceHolder,HomePostsFragment.newInstance())
+//            .commit()
     }
 
     companion object {

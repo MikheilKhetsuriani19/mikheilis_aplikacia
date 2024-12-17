@@ -1,4 +1,4 @@
-package com.example.mobileapplication11.profile.adapters
+package com.example.mobileapplication11.models
 
 data class Highlights(
     val storyImage : String,

@@ -1,22 +1,19 @@
 package com.example.mobileapplication11.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mobileapplication11.R
 import com.example.mobileapplication11.databinding.FragmentProfileBinding
-import com.example.mobileapplication11.profile.adapters.Highlights
-import com.example.mobileapplication11.profile.adapters.HighlightsAdapter
-import com.example.mobileapplication11.profile.adapters.ViewPagerAdapter
+import com.example.mobileapplication11.models.Highlights
+import com.example.mobileapplication11.adapters.HighlightsAdapter
+import com.example.mobileapplication11.adapters.ViewPagerAdapter
 import com.example.mobileapplication11.profile.profileFragments.MainUserPostsFragment
 import com.example.mobileapplication11.profile.profileFragments.MainUserTaggedFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 class ProfileFragment : Fragment() {
 

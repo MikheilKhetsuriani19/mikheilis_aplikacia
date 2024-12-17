@@ -1,4 +1,4 @@
-package com.example.mobileapplication11.profile.adapters
+package com.example.mobileapplication11.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

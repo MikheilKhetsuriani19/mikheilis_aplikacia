@@ -1,4 +1,4 @@
-package com.example.mobileapplication11.profile.adapters
+package com.example.mobileapplication11.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapplication11.R
 import com.example.mobileapplication11.databinding.ItemStoryBinding
+import com.example.mobileapplication11.models.Highlights
 
 class HighlightsAdapter : ListAdapter<Highlights, HighlightsAdapter.Holder>(Comparator()) {
 
