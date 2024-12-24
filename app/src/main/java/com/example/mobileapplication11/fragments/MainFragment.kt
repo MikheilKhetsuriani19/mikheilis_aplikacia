@@ -1,70 +1,74 @@
 package com.example.mobileapplication11.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.mobileapplication11.R
+import com.example.mobileapplication11.adapters.MainViewPagerAdapter
 import com.example.mobileapplication11.databinding.FragmentMainBinding
 import com.example.mobileapplication11.home.HomeFragment
 import com.example.mobileapplication11.home.homePosts.HomePostsFragment
-import com.example.mobileapplication11.profile.ProfileFragment
+import com.example.mobileapplication11.fragments.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater, container,false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(HomePostsFragment.newInstance())
-        bottomNavigationListener()
+
+        setupViewPager()
+        setupBottomNavigation()
     }
 
-    private fun bottomNavigationListener() = with(binding){
-        bottomNavigationMenu.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> {
-                    loadFragment(HomePostsFragment.newInstance())
-                    true
-                }
-                R.id.search -> {
-                    Toast.makeText(requireContext(), "coming soon!", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.add -> {
-                    Toast.makeText(requireContext(), "coming soon!", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.notifications -> {
-                    Toast.makeText(requireContext(), "coming soon!", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.profile -> {
-                    loadFragment(ProfileFragment.newInstance())
-                    true
-                }
-                else -> {
-                    loadFragment(HomeFragment.newInstance())
-                    true
-                }
+    private fun setupViewPager() {
+        viewPager = binding.mainViewPager
+
+
+        val fragments = listOf(
+            HomePostsFragment.newInstance(),
+            SearchFragment.newInstance("ExampleParam1", "ExampleParam2"),
+            HomeFragment.newInstance()
+        )
+
+        val adapter = MainViewPagerAdapter(this, fragments)
+        viewPager.adapter = adapter
+
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.bottomNavigationMenu.menu.getItem(position).isChecked = true
             }
-        }
+        })
     }
 
-    private fun loadFragment(fragment: Fragment){
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .commit()
+    private fun setupBottomNavigation() {
+        binding.bottomNavigationMenu.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> viewPager.currentItem = 0
+                R.id.search -> viewPager.currentItem = 1
+                R.id.add -> {
+
+                    viewPager.currentItem = 2
+                }
+                else -> false
+            }
+            true
+        }
     }
 
     companion object {
